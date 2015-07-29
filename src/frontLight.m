@@ -1,5 +1,6 @@
 function [Bx, By, Bz] = frontLight(main)
     
+    [BxB, ByB, BzB] = bonnet(true);
     % Initialize matrices
     x = 0
     Bx = [x, x, x, x; 
@@ -15,19 +16,23 @@ function [Bx, By, Bz] = frontLight(main)
              10, x, x, 225; 
              20, x, x, 240; 
              30, 100, 200, 265];
-    Bx = Bx + tmpBx
+    Bx = Bx + tmpBx;
     
-    tmpBy = [0, 22, 45, 70; 
+    tmpBy = [0, 22, 45, 73; 
              20, x, x, 90; 
              60, x, x, 110; 
-             88, 115, 125, 134];
-    By = By - tmpBy
+             97, 118, 129, 139];
+    By = By - tmpBy;
     
     tmpBz = [0, 35, 60, 110; 
              1, x, x, 111; 
              2, x, x, 112; 
              3, 45, 90, 113];
-    Bz = Bz + tmpBz
+    Bz = Bz + tmpBz;
+    
+    Bx(1,1) = BxB(4, 1);
+    By(1,1) = ByB(4, 1);
+    Bz(1,1) = BzB(4, 1);
     
     % Edit middle
     Bx = coonsPatch(Bx, 'normal');
@@ -38,7 +43,7 @@ function [Bx, By, Bz] = frontLight(main)
              x, 0, 0, x; 
              x, 0, 0, x; 
              x, x, x, x];
-    Bx = Bx + tmpBx
+    Bx = Bx + tmpBx;
     
     tmpBy = [x, x, x, x; 
              x, 0, 0, x; 

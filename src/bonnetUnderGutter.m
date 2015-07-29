@@ -26,44 +26,36 @@ function [Bx, By, Bz] = bonnetUnderGutter(main)
     
     % Edit edges
     tmpBx = [x, x, x, x; 
-             10, x, x, 3; 
-             30, x, x, 5; 
-             148, 130, 120, x];
+             x, x, x, 3; 
+             x, x, x, 5; 
+             x, 200, 200, x];
     Bx = Bx + tmpBx
     
     tmpBy = [x, x, x, x; 
-             30, x, x, x; 
-             60, x, x, x; 
-             98, 110, 120, x];
+             x, x, x, x; 
+             x, x, x, x; 
+             x, 98, 125, x];
     By = By - tmpBy
     
     tmpBz = [x, x, x, x; 
-             10, x, x, x; 
-             20, x, x, x; 
+             x, x, x, x; 
+             x, x, x, x; 
              x, 50, 40, x];
     Bz = Bz + tmpBz
+    
+    
     [BxL, ByL, BzL] = readMetrices('frontLight');
-    Bz(4, 1) = BzL(1, 4)
+    Bx(:, 1) = BxL(1, :)
+    By(:, 1) = ByL(1, :)
+    Bz(:, 1) = BzL(1, :)
     
     % Edit middle
     Bx = coonsPatch(Bx, 'normal');
     By = coonsPatch(By, 'normal');
     
-    tmpBx = [x, x, x, x; 
-             x, 0, 0, x; 
-             x, 0, 0, x; 
-             x, x, x, x];
-    Bx = Bx + tmpBx
-    
-    tmpBy = [x, x, x, x; 
-             x, 0, 0, x; 
-             x, 0, 0, x; 
-             x, x, x, x];
-    By = By + tmpBy
-    
     tmpBz = [x, x, x, x; 
-             x, 10, 10, 20; 
-             x, 10, 10, 20; 
+             x, 15, 15, 10; 
+             x, 15, 15, 10; 
              x, x, x, x];
     Bz = Bz + tmpBz
     
@@ -75,6 +67,6 @@ function [Bx, By, Bz] = bonnetUnderGutter(main)
     if (nargin == 0)
         figure('units','normalized','outerposition',[0 0 1 1]);
         car3();
-        view([0 0]);
+        view([0 90]);
     end
 end

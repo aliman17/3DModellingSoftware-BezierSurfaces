@@ -48,7 +48,17 @@ function out = car3()
     [s1, s2] = plotMirroredPiece('betweenLightAndReinforce', middle_line_value);
     set(s1, 'FaceColor',[1 0.5 0.0],'FaceAlpha',1);
     set(s2, 'FaceColor',[1 0.5 0.0],'FaceAlpha',1);
+    [s1, s2] = plotMirroredPiece('frontBonnet', middle_line_value);
+    set(s1, 'FaceColor',[1 0.5 0.0],'FaceAlpha',1);
+    set(s2, 'FaceColor',[1 0.5 0.0],'FaceAlpha',1);
+    [s1, s2] = plotMirroredPiece('frontUpperMask', middle_line_value);
+    set(s1, 'FaceColor',[1 0.5 0.0],'FaceAlpha',1);
+    set(s2, 'FaceColor',[1 0.5 0.0],'FaceAlpha',1);
+    [s1, s2] = plotMirroredPiece('frontBottomMask', middle_line_value);
+    set(s1, 'FaceColor',[1 0.5 0.0],'FaceAlpha',1);
+    set(s2, 'FaceColor',[1 0.5 0.0],'FaceAlpha',1);
 
+    
     %shading interp
     %hold off
     
