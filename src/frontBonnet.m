@@ -4,7 +4,7 @@ function [Bx, By, Bz] = frontBonnet(main)
     [BxL, ByL, BzL] = frontLight(true);
     
     x = 0;
-    Bx = [x, x, x, x; 
+    Bx = [x,x,x,x; 
           x,x,x,x;
           x,x,x,x;
           x,x,x,x];

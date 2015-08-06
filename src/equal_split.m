@@ -1,5 +1,5 @@
 function v = equal_split(p1, p2, len)
-    % Input:    v1, v2 represents 2 curves (only one dimension)
+    % Input:    p1, p2 represents 2 curves (only one dimension)
     %           levels is the number of intermediate curves that we want to
     %           specify the points
     % Return:   Bx, which is matrix of computed values
