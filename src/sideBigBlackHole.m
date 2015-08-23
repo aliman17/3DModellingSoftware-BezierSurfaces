@@ -8,7 +8,7 @@ function sideBigBlackHole(main)
           x,x,x,x];
       
     out4 = edge_fit('side6', 'right');
-    out5 = edge_fit('side7', 'left');
+    out5 = edge_fit('side13', 'left');
     
     X4 = out4(:, 1);
     Y4 = out4(:, 2);

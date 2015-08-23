@@ -1,47 +1,44 @@
 function sideLight(main)
 
+    [X, Y, Z, dx, dy, dz] = edge_fit2('frontLight', 'bottom');
+
     x = 0;
-       
-    Bx = [20,x,x,50; 
+    % Edge
+    Bx = [X(4),1545,1555,1565;
+1438.3,1468.3,1508.3,1535.3;
+1341.7,1401.7,1466.7,1524.7;
+X(1),1335,1425,1509];
+    Bx(:, 1) = fliplr(X);
+   
+    % Edge
+    By = [813,x,x,780; 
           x,x,x,x;
           x,x,x,x;
-          -270,x,x,0];
-    Bx(4, :) = equal_split(Bx(4,1), Bx(4,4), 4) %bottom
-    Bx(:, 1) = equal_split(Bx(1,1), Bx(4,1), 4) %left 
-    Bx(1, :) = equal_split(Bx(1,1), Bx(1,4), 4) %top
-    Bx(:, 4) = equal_split(Bx(1,4), Bx(4,4), 4) %right
-    Bx = coons(Bx, 'normal');
-    Bx = Bx + 1515;
+          Y(1)-15,x,x,780];
+    % Rectangle
+    By = square(By);
     
-    Bx = Bx + [x,x,x,x; 
-               x,x,x,-10;
-               x,x,x,-5;
-               x,x,x,x];
-      
-    By = -[20,14,7,0; 
-          25,x,x,0;
-          30,x,x,0;
-          30,20,10,0];
-      
-    By = coons(By, 'normal');
-    By = By + 800;
-      
-    Bz = [100,70,60,50; 
-          70,x,x,30;
-          30,x,x,20;
-          -38,-20,-10,0];
-      
-    Bz = coons(Bz, 'normal');
-    Bz = Bz + 350;
-    
+    By = By + [x,x,-3,x; 
+               x,x,-5,x;
+               x,x,-7,x;
+               x,-5,-10,x];
+    By(:, 1) = fliplr(Y) - 15;
+    By(1, 1) =  By(1, 1) +4;
+           
+    % Edge
+    Bz = [450,420,410,400;
+420,397,388.5,383;
+380,373,371.5,370;
+Z(1),Z(1),Z(1),Z(1)];
+      Bz(:, 1) = fliplr(Z);
+
     % Write matrices into file
     storeMatrices('sideLight', Bx, By, Bz);
      
     % This enables to run from this file
     if (nargin == 0)
-        figure('units','normalized','outerposition',[0 0 1 1]);
-        car3();
-         view([0 0]);
+        computeAllMetrices()
+         view([0 90]);
 %         view([0 0]);
     end
 

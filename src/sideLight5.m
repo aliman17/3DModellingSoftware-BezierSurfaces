@@ -1,47 +1,47 @@
 function sideLight5(main)
 
     x = 0;
-    df_alpha = 1;
-    Bx = [x,x,x,x; 
-          x,x,x,x;
-          x,x,x,x;
-          x,x,x,x];
-    out = edge_fit('sideLight3', 'bottom');
+    df = [0, 0, 0.2, 1];
+    df2 = 1;
     
-    X = out(:, 1)';
-    Y = out(:, 2)';
-    Z = out(:, 3)';
+    [X, Y, Z, dx, dy, dz] = edge_fit2('sideLight3', 'bottom');
+    [X2, Y2, Z2, dx2, dy2, dz2] = edge_fit2('sideLight6', 'left');
     
-    dx = out(:, 4)';
-    dy = out(:, 5)';
-    dz = out(:, 6)';
     
     % Edge
-    Bx = [X;X;X;X];
+    Bx =  [X(1),x,x,X(4); 
+          x,x,x,x;
+          x,x,x,x;
+          X(4),x,x,X2(4)];
+      
     % Other two vertices
-    Bx(4,1) = Bx(1, 1) + 100;
-    Bx(4,4) = Bx(1, 4) + 10;
     % Rectangle
     Bx = square(Bx);
     % Correct edge
     Bx(1, :) = X;
-    Bx(2, :) = X + df_alpha*dx;
-    Bx(2, 1) = Bx(1, 2)
+    Bx(2, :) = X + df.*dx;
+    Bx(:, 4) = X2;
+    Bx(:, 3) = X2 + df2*dx2;
+    Bx(2, 2) = X(2);
+    
     Bx = Bx + [x,x,x,x; 
-               x,100,x,x;
-               100,80,x,x;
-               60,80,x,x];
+               x,40,40,x;
+               x,20,20,x;
+               x,x,x,x];
       
     % Edge
-    By = [Y;Y;Y;Y];
-    % Other two vertices
-   	By(4,1) = By(1, 4);
-    By(4,4) = By(4, 4);
+    By = [Y(1),x,x,Y(4); 
+           x,x,x,x;
+           x,x,x,x;
+           Y(4),x,x,Y2(4)];
     % Rectangle
     By = square(By);
     % Correct edge
     By(1, :) = Y;
-    By(2, :) = Y + df_alpha*dy;
+    By(2, :) = Y + df.*dy;
+    By(:, 4) = Y2;
+    By(:, 3) = Y2 + df2*dy2;
+    By(2, 2) = Y(2);
     
     By = By + [x,x,x,x; 
                x,x,x,x;
@@ -49,19 +49,22 @@ function sideLight5(main)
                x,x,x,x];
            
     % Edge
-    Bz = [Z;Z;Z;Z];
-    % Other two vertices
-    Bz(4,1) = Bz(1, 1) - 220;
-    Bz(4,4) = Bz(1, 4) - 190;
+    Bz = [Z(1),x,x,Z(4); 
+           x,x,x,x;
+           x,x,x,x;
+           Z(4),x,x,Z2(4)];
     % Rectangle
     Bz = square(Bz);
     % Correct edge
     Bz(1, :) = Z;
-    Bz(2, :) = Z + df_alpha*dz;
-    Bz(2, 1) = Bz(1,2) 
+    Bz(2, :) = Z + df.*dz;
+    Bz(:, 4) = Z2;
+    Bz(:, 3) = Z2 + df2*dz2;
+    Bz(2, 2) = Z(2);
+    
     Bz = Bz + [x,x,x,x; 
-               x,50,x,x;
-               100,x,x,x;
+               x,x,x,x;
+               x,x,x,x;
                x,x,x,x];
       
     

@@ -1,61 +1,53 @@
 function [Bx, By, Bz] = frontBottomMask(main)
 
-    [BxB, ByB, BzB] = frontUpperMask(true);
+    [X, Y, Z, dx, dy, dz] = edge_fit2('frontSide3', 'left');
+
+    x = 0
+    % Edge
+    Bx = [X(4)-50,x,x,X(1)-50; 
+          x,x,x,x;
+          x,x,x,x;
+          X(4),x,x,X(1)];
+    % Rectangle
+    Bx = square(Bx);
+    % Correct edge
+    Bx(4, :) = flipud(X);
     
-    x = 0;
-    Bx = [x,x,x,x; 
+    Bx = Bx + [x,x,x,x; 
+               x,x,x,x;
+               x,x,x,x;
+               x,x,x,x];
+      
+    mlv = 1225
+    % Edge
+    By = [mlv,x,x,mlv; 
           x,x,x,x;
           x,x,x,x;
-          x,x,x,x];
-    for i=1:4
-        Bx(:, i) = BxB(:, 4);
-    end  
-      
-    tmpBx = [40,20,10,x; 
-          40,20,10,x;
-          40,20,10,x;
-          40,20,10,x];
-      
-    Bx = Bx - tmpBx;
+          Y(4),x,x,Y(1)];
+    % Rectangle
+    By = square(By);
+    % Correct edge
+    By(4, :) = flipud(Y);
     
-    %%%%%%%%%%%%%%%% Y
-    
-    By = [x,x,x,x; 
+    By = By + [x,x,x,x; 
+               x,x,x,x;
+               x,x,x,x;
+               x,x,x,x];
+           
+    Bz = [Z(4),x,x,Z(1); 
           x,x,x,x;
           x,x,x,x;
-          x,x,x,x];
-    for i=1:4
-        By(:, i) = ByB(:, 4);
-    end  
-    
-    tmpBy = [x,x,x,x; 
-          x,x,x,x;
-          x,x,x,x;
-          x,x,x,x];
+          Z(4),x,x,Z(1)];
+    % Rectangle
+    Bz = square(Bz);
+    % Correct edge
+    Bz(4, :) = flipud(Z);
+
+    Bz = Bz + [x,x,x,x; 
+               x,x,x,x;
+               x,x,x,x;
+               x,x,x,x];
       
-    By = By + tmpBy;
-      
-    %%%%%%%%%%%%%%%% Z
-    Bz = [x, x, x, x; 
-          x,x,x,x;
-          x,x,x,x;
-          x,x,x,x];
-    for i=1:4
-        Bz(:, i) = BzB(:, 4);
-    end  
-    
-    tmpBz = [20,10,x,x; 
-          20,10,x,x;
-          20,10,x,x;
-          20,10,x,x];
-      
-    Bz = Bz - tmpBz;
-     
-     
-     
-%      Bx = coonsPatch(Bx, 'normal');
-%      By = coonsPatch(By, 'normal');
-%      Bz = coonsPatch(Bz, 'normal');
      
     % Write matrices into file
     storeMatrices('frontBottomMask', Bx, By, Bz);

@@ -1,4 +1,4 @@
-function side5(main)
+function side6(main)
 
     x = 0;
     df_alpha = 1;
@@ -33,7 +33,10 @@ function side5(main)
                x,x,x,x];
       
     % Edge
-    By = [Y,Y,Y,Y];
+    By = [Y(1),x,x,Y(1)+50; 
+               x,x,x,x;
+               x,x,x,x;
+               Y(4),x,x,Y(4)+60];
     % Other two vertices
     By(:, 4) = By(:, 4) + dy;
     % Rectangle
@@ -41,13 +44,11 @@ function side5(main)
     % Correct edge
     By(:, 1) = Y;
     By(:, 2) = Y + df_alpha*dy;
-    By(:, 3) = Y + 2*df_alpha*dy;
-    By(:, 4) = Y + 5*df_alpha*dy;
     
-    By = By + [x,x,20,50; 
-               x,x,20,50;
-               x,x,20,50;
-               x,x,20,50];
+    By = By + [x,x,x,x; 
+               x,x,x,x;
+               x,x,x,x;
+               x,x,x,x];
            
     % Edge
     Bz = [Z,Z,Z,Z];
@@ -73,7 +74,7 @@ function side5(main)
     % This enables to run from this file
     if (nargin == 0)
         figure('units','normalized','outerposition',[0 0 1 1]);
-        car3();
+        computeAllMetrices();
          view([0 0]);
 %         view([0 0]);
     end

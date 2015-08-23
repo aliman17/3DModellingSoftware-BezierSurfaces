@@ -41,7 +41,7 @@ function Bx = equal_dist_middle(Bx, type, considerOldBx)
                 if considerOldBx
                     Bx(j+1, i) = Bx(j+1, i) + Bx(1, i) - j * step;
                 else
-                    Bx(j+1, i) = Bx(1, i) - j * step;    
+                    Bx(j+1, i) = Bx(1, i) - j * step    
             end
         end
     end

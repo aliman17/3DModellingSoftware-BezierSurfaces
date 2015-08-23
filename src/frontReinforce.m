@@ -14,9 +14,9 @@ function [Bx, By, Bz] = frontReinforce(main)
           -30, -23, -24, -30];
       
     Bz = [x, x, x, x;
-          10, 10, 10, 10;
-          0, 0, +10, +10;
-          0, 0, -10, -15];
+          10, 10, 10, 13;
+          0, 0, 3, +10;
+          0, 0, -15, -10];
      
      for i=[1,4]
          Bx(i,:) = Bx(i,:) + BxW(4,:);
@@ -27,13 +27,23 @@ function [Bx, By, Bz] = frontReinforce(main)
      By = equal_dist_middle(By, false, true);
      Bz = equal_dist_middle(Bz, false, true);
      
+     Bx = Bx + [x, x, x, x;
+          -20, x, x, x;
+          -10, x, x, x;
+          x, x, x, x;];
+     
+     Bz = Bz + [x, x, x, x;
+          -10, x, x, x;
+          x, x, x, x;
+          x, x, x, x;];
+     
     % Write matrices into file
     storeMatrices('frontReinforce', Bx, By, Bz);
      
     % This enables to run from this file
     if (nargin == 0)
         figure('units','normalized','outerposition',[0 0 1 1]);
-        car3();
+        computeAllMetrices();
         view([0 90]);
     end
 end

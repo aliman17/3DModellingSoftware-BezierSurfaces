@@ -1,44 +1,21 @@
 function side2(main)
 
     x = 0;
-    df_alpha = 1;
-    Bx = [x,x,x,x; 
-          x,x,x,x;
-          x,x,x,x;
-          x,x,x,x];
-      
-    out4 = edge_fit('side1', 'bottom');
-    out5 = edge_fit('sideLight6', 'right');
-    
-    X4 = out4(:, 1)';
-    Y4 = out4(:, 2)';
-    Z4 = out4(:, 3)';
-    
-    dx4 = out4(:, 4)';
-    dy4 = out4(:, 5)';
-    dz4 = out4(:, 6)';
-    
-    X5 = out5(:, 1);
-    Y5 = out5(:, 2);
-    Z5 = out5(:, 3);
-    
-    dx5 = out5(:, 4);
-    dy5 = out5(:, 5);
-    dz5 = out5(:, 6);
+    df = 1;
+
+    [X, Y, Z, dx, dy, dz] = edge_fit2('side1', 'bottom');
     
     % Edge
-    Bx = [X4;X4;X4;X4];
-    % Other two vertices
-    Bx(1, :) = X4;
-    Bx(:, 1) = X5;
-    Bx(4,4) = Bx(1, 4) - 40;
+    Bx =  [X(1),x,x,X(4); 
+          x,x,x,x;
+          x,x,x,x;
+          X(1),x,x,X(4)];
     % Rectangle
     Bx = square(Bx);
     % Correct edge
-    Bx(1, :) = X4;
-    Bx(:, 1) = X5;
-    Bx(2, :) = X4 + dx4;
-    Bx(:, 2) = X5 + df_alpha*dx5;
+    % Other two vertices
+    Bx(1, :) = X;
+    Bx(2, :) = X + df*dx;
 
     Bx = Bx + [x,x,x,x; 
                x,x,x,x;
@@ -46,34 +23,33 @@ function side2(main)
                x,x,x,x];
       
     % Edge
-    By = [Y4;Y4;Y4;Y4];
-    % Other two vertices
-   	By(4,1) = By(1, 1);
-    By(4,4) = By(1, 4);
+    By =  [Y(1),x,x,Y(4); 
+          x,x,x,x;
+          x,x,x,x;
+          Y(1),x,x,Y(4)];
     % Rectangle
     By = square(By);
     % Correct edge
-    By(1, :) = Y4;
-    By(2, :) = Y4 + dy4;
-    By(:, 2) = Y5 + df_alpha*dy5;
-    
+    % Other two vertices
+    By(1, :) = Y;
+    By(2, :) = Y + df*dy;
+
     By = By + [x,x,x,x; 
                x,x,x,x;
                x,x,x,x;
                x,x,x,x];
            
     % Edge
-    Bz = [Z4;Z4;Z4;Z4];
-    % Other two vertices
-    Bz(4,1) = Z5(4);
-    Bz(4,4) = Bz(4, 1) + 30;
+    Bz =  [Z(1),x,x,Z(4); 
+      x,x,x,x;
+      x,x,x,x;
+      200.67,x,x,230.67];
     % Rectangle
     Bz = square(Bz);
     % Correct edge
-    Bz(:, 1) = Z5;
-    Bz(:, 2) = Z5 + dz5;
-    Bz(1, :) = Z4;
-    Bz(2, :) = Z4 + dz4;
+    % Other two vertices
+    Bz(1, :) = Z;
+    Bz(2, :) = Z + df*dz;
     
     Bz = Bz + [x,x,x,x; 
                x,x,x,x;
@@ -88,7 +64,7 @@ function side2(main)
     % This enables to run from this file
     if (nargin == 0)
         figure('units','normalized','outerposition',[0 0 1 1]);
-        %car3();
+        car3();
          view([0 0]);
 %         view([0 0]);
     end

@@ -31,7 +31,7 @@ function side4(main)
     % Other two vertices
     Bx(1, :) = X4;
     Bx(:, 1) = X5;
-    Bx(4,4) = Bx(1, 4) - 100;
+    Bx(4,4) = Bx(1, 4) - 80;
     % Rectangle
     Bx = square(Bx);
     % Correct edge
@@ -48,19 +48,15 @@ function side4(main)
     % Edge
     By = [Y4;Y4;Y4;Y4];
     % Other two vertices
-   	By(4,1) = By(1, 1);
-    By(4,4) = By(1, 4);
-    % Rectangle
-    By = square(By);
+
     % Correct edge
-    By(1, :) = Y4;
-    By(2, :) = Y4 + dy4;
+    By(:, 1) = Y5;
     By(:, 2) = Y5 + df_alpha*dy5;
     
-    By = By + [x,x,15,20; 
-               x,x,15,20;
-               x,x,15,20;
-               x,x,15,20];
+    By = By + [x,x,x,x; 
+               x,x,x,x;
+               x,x,x,x;
+               x,x,x,x];
            
     % Edge
     Bz = [Z4;Z4;Z4;Z4];
@@ -88,7 +84,7 @@ function side4(main)
     % This enables to run from this file
     if (nargin == 0)
         figure('units','normalized','outerposition',[0 0 1 1]);
-        car3();
+        computeAllMetrices();
          view([0 0]);
 %         view([0 0]);
     end

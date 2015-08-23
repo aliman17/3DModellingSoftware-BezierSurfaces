@@ -20,10 +20,10 @@ function sideBottom2(main)
     % Correct edge
     Bx(1, :) = X;
     Bx(2, :) = X + dx;
-    Bx = Bx + [x,x,x,x; 
-               x,x,x,x;
-               x,x,x,x;
-               x,200,200,x];
+    Bx = Bx + [-40,x,x,30; 
+               -40,x,x,33;
+               -40,x,x,35;
+               -40,200,200,40];
       
     % Edge
     By = [Y(1),x,x,Y(1); 
@@ -48,12 +48,12 @@ function sideBottom2(main)
     % Rectangle
     Bz = square(Bz);
     % Correct edge
-    Bz(1, :) = Z - 4;
-    Bz(2, :) = Z - 4 + dz;
+    Bz(1, :) = Z - 2;
+    Bz(2, :) = Z - 2 + dz;
     Bz = Bz + [x,x,x,x; 
                x,x,x,x;
-               x,x,x,x;
-               x,x,x,x];
+               x,x,x,-10;
+               x,x,-5,-10];
       
     
 

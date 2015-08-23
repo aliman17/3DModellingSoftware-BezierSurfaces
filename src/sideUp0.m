@@ -1,18 +1,18 @@
 function sideUp0(main)
 
     x = 0;
-    df = 0.3;
+    df = [0.3, 0.2, 0.2, 0.1];
 
     [X, Y, Z, dx, dy, dz] = edge_fit2('sideUp1', 'left');
     [X2, Y2, Z2, dx2, dy2, dz2] = edge_fit2('sideLight4', 'top');
-    [X3, Y3, Z3, dx3, dy3, dz3] = edge_fit2('frontReinforce', 'left');
+%     [X3, Y3, Z3, dx3, dy3, dz3] = edge_fit2('frontReinforce', 'left');
     
     Bx = [x,x,x,x; 
           x,x,x,x;
           x,x,x,x;
           x,x,x,x];
     % Edge
-    Bx = [X3(4),x,x,X(4); 
+    Bx = [1735,x,x,X(4); 
           x,x,x,x;
           x,x,x,x;
           X2(1),x,x,X2(4)];
@@ -29,7 +29,7 @@ function sideUp0(main)
                x,x,x,x];
       
     % Edge
-    By = [Y3(4),x,x,Y(4); 
+    By = [837,x,x,Y(4); 
           x,x,x,x;
           x,x,x,x;
           Y2(1),x,x,Y2(4)];
@@ -45,7 +45,7 @@ function sideUp0(main)
                x,x,x,x;
                x,x,x,x];
            
-    Bz = [Z3(4),x,x,Z(4); 
+    Bz = [480,x,x,Z(4); 
           x,x,x,x;
           x,x,x,x;
           Z2(1),x,x,Z2(4)];
@@ -56,8 +56,8 @@ function sideUp0(main)
     Bz(:, 3) = Z + df*dz;
     Bz(4, :) = Z2;
     
-    Bz = Bz + [x,17,x,x; 
-               x,10,x,x;
+    Bz = Bz + [x,7,x,x; 
+               x,3,x,x;
                x,x,x,x;
                x,x,x,x];
       
@@ -69,7 +69,7 @@ function sideUp0(main)
     % This enables to run from this file
     if (nargin == 0)
         figure('units','normalized','outerposition',[0 0 1 1]);
-        car3();
+        computeAllMetrices();
          view([0 0]);
 %         view([0 0]);
     end

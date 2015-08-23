@@ -1,4 +1,4 @@
-function sideWindow1()
+function sideWindow1(main)
 
     x = 0;
     df = 0.3;

@@ -1,7 +1,7 @@
 function out = bezier_surface(Bx, By, Bz)
     
-    u = 0:0.1:1;
-    v = 0:0.1:1;
+    u = 0:0.05:1;
+    v = 0:0.05:1;
     
     u_len = length(u);
     v_len = length(v);

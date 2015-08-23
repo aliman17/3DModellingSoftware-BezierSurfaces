@@ -1,51 +1,28 @@
 function backUp1()
-
-    x = 0;
-    df = 0.3;
-
-    [X, Y, Z, dx, dy, dz] = edge_fit2('sideUpBlackRight', 'bottom');
-    [X2, Y2, Z2, dx2, dy2, dz2] = edge_fit2('sideUpBlackLeft', 'top');
-    
+    x = 0
     % Edge
-    Bx = [X2(4),x,x,X2(4) + 460; 
-          x,x,x,x;
-          x,x,x,x;
-          X(4),x,x,X(4) + 430];
-    % Rectangle
-    Bx = square(Bx);
-    % Correct edge
-    
-    Bx = Bx + [x,x,x,x; 
-               x,x,x,x;
-               x,x,x,x;
-               x,x,x,x];
+    Bx = [2655,2730.3,2961.7,3115;
+        2655,2805.8,2955.4,3105;
+        2655,2802.1,2948.5,3095;
+        2665,2748.7,2941.7,3085];
       
     % Edge
-    By = [Y2(4),x,x,Y2(4)+60; 
-          x,x,x,x;
-          x,x,x,x;
-          Y(4),x,x,Y(4)+30];
-    % Rectangle
-    By = square(By);
-    
-    By = By + [x,15,13,x; 
-               x,7,4,x;
-               x,x,x,x;
-               x,x,x,x];
+    By = [929,950,982,989;
+        900.67,925.17,938.42,950.67;
+        872.33,886.08,899.21,912.33;
+        844,851.67,864,874];
            
-    Bz = [Z2(4),x,x,Z2(4); 
-          x,x,x,x;
-          x,x,x,x;
-          Z(4),x,x,Z(4)];
+    Bz = [535,x,x,515;
+        x,x,x,x;
+        x,x,x,x;
+        517,x,x,500];
     % Rectangle
     Bz = square(Bz);
-    % Correct edge
-
-    Bz = Bz + [x,x,x,x; 
-               x,x,x,x;
-               x,x,x,x;
-               x,x,x,x];
-      
+    % Correct edge    
+    Bz = Bz + [x,10,35,x; 
+               7,12,36,x;
+               3,22,36,x;
+               x,20,35,x];
     
 
     % Write matrices into file
@@ -54,6 +31,7 @@ function backUp1()
     % This enables to run from this file
     if (nargin == 0)
         figure('units','normalized','outerposition',[0 0 1 1]);
+        axis([600 3000 0 2000 0 2000])
         car3();
          view([0 90]);
 %         view([0 0]);

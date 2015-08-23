@@ -28,6 +28,8 @@ function [Bx, By, Bz] = roof(main)
     Bz = Bz + BzW(size(BzW, 1), size(BzW, 2));
     Bz(:, 1) = BzW(:, 4) ;
     
+    Bz(2, :) = Bz(1, :);
+    
     % Write matrices into file
     storeMatrices('roof', Bx, By, Bz);
     

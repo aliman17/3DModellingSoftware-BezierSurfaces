@@ -3,6 +3,8 @@ function [Bx, By, Bz] = frontBonnet(main)
     [BxB, ByB, BzB] = bonnet(true);
     [BxL, ByL, BzL] = frontLight(true);
     
+    [X, Y, Z, dx, dy, dz] = edge_fit2('frontSide1', 'left');
+    
     x = 0;
     Bx = [x,x,x,x; 
           x,x,x,x;
@@ -12,13 +14,13 @@ function [Bx, By, Bz] = frontBonnet(main)
         Bx(:, i) = BxB(:, 1);
     end  
       
-    tmpBx = [-33, -20, -10, -2; 
+    tmpBx = [-33, -20, -14, -2; 
           -33, -20, -10, -2;
           -40, -20, -15, -10;
           -20,-5, 10,x];
       
     Bx = Bx + tmpBx;
-    Bx(4, 4) = BxL(4, 1);
+    Bx(4, :) = flipud(X);
     
     %%%%%%%%%%%%%%%% Y
     
@@ -36,7 +38,7 @@ function [Bx, By, Bz] = frontBonnet(main)
           86,92,94,95];
       
     By = By - tmpBy;
-    By(4, 4) = ByL(4, 1);
+    By(4, :) = flipud(Y);
       
     %%%%%%%%%%%%%%%% Z
     Bz = [x, x, x, x; 
@@ -53,13 +55,9 @@ function [Bx, By, Bz] = frontBonnet(main)
           32, 15, 7, x;];
       
     Bz = Bz - tmpBz;
-    Bz(4, 4) = BzL(4, 1);
+    Bz(4, :) = flipud(Z);
      
      
-     
-%      Bx = coonsPatch(Bx, 'normal');
-%      By = coonsPatch(By, 'normal');
-%      Bz = coonsPatch(Bz, 'normal');
      
     % Write matrices into file
     storeMatrices('frontBonnet', Bx, By, Bz);

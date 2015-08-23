@@ -1,31 +1,24 @@
 function sideLight4(main)
 
     x = 0;
-    df_alpha = 0.3;
+    df = 0.2;
+    df2 = 0.1;
     Bx = [x,x,x,x; 
           x,x,x,x;
           x,x,x,x;
           x,x,x,x];
-    out = edge_fit('sideLight3', 'right');
-    
-    X = out(:, 1);
-    Y = out(:, 2);
-    Z = out(:, 3);
-    
-    dx = out(:, 4);
-    dy = out(:, 5);
-    dz = out(:, 6);
+    [X, Y, Z, dx, dy, dz] = edge_fit2('sideLight3', 'right');
+    [X2, Y2, Z2, dx2, dy2, dz2] = edge_fit2('side1', 'left');
+
     
     % Edge
     Bx = [X,X,X,X];
-    % Other two vertices
-    Bx(1,4) = Bx(1, 4) + df_alpha * dx(1) + 20;
-    Bx(4,4) = Bx(4, 4) + df_alpha * dx(4) + 20;
-    % Rectangle
-    Bx = square(Bx);
+
     % Correct edge
     Bx(:, 1) = X;
-    Bx(:, 2) = X + df_alpha*dx;
+    Bx(:, 2) = X + df*dx;
+    Bx(:, 4) = X2;
+    Bx(:, 3) = X2 + df*dx2;
     
     Bx = Bx + [x,x,x,x; 
                x,x,x,x;
@@ -34,13 +27,11 @@ function sideLight4(main)
       
     % Edge
     By = [Y,Y,Y,Y];
-    % Other two vertices
-    By(:, 4) = By(:, 4) + dy;
-    % Rectangle
-    By = square(By);
-    % Correct edge
+        % Correct edge
     By(:, 1) = Y;
-    By(:, 2) = Y + df_alpha*dy;
+    By(:, 2) = Y + df*dy;
+    By(:, 4) = Y2;
+    By(:, 3) = Y2 + df*dy2;
     
     By = By + [x,x,x,x; 
                x,x,x,x;
@@ -49,17 +40,13 @@ function sideLight4(main)
            
     % Edge
     Bz = [Z,Z,Z,Z];
-    % Other two vertices
-    Bz(1,4) = Bz(1, 4)+ 0;
-    Bz(4,4) = Bz(4, 4)+ 0;
-    % Rectangle
-    Bz = square(Bz);
-    % Correct edge
+       % Correct edge
     Bz(:, 1) = Z;
-    Bz(:, 2) = Z + df_alpha*dz;
-    %Bz(4, 2) = Bz(4,1);
+    Bz(:, 2) = Z + df*dz;
+    Bz(:, 4) = Z2;
+    Bz(:, 3) = Z2 + df*dz2;
     
-    Bz = Bz + [x,x,-7,-7; 
+    Bz = Bz + [x,x,x,x; 
                x,x,x,x;
                x,x,x,x;
                x,x,x,x];

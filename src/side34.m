@@ -34,7 +34,8 @@ function side34(main)
     % Rectangle
     Bx = square(Bx);
     % Correct edge
-
+    Bx(1, :) = X4;
+    Bx(4, :) = X5;
     Bx = Bx + [x,x,x,x; 
                x,x,x,x;
                x,x,x,x;
@@ -48,7 +49,8 @@ function side34(main)
     % Rectangle
     By = square(By);
     % Correct edge
-    
+    By(1, :) = Y4;
+    By(4, :) = Y5;
     By = By + [x,x,x,x; 
                x,x,x,x;
                x,x,x,x;
@@ -62,7 +64,8 @@ function side34(main)
     % Rectangle
     Bz = square(Bz);
     % Correct edge
-    
+    Bz(1, :) = Z4;
+    Bz(4, :) = Z5;
     Bz = Bz + [x,x,x,x; 
                x,x,x,x;
                x,x,x,x;

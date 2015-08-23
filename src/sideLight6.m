@@ -1,43 +1,23 @@
 function sideLight6(main)
 
     x = 0;
-    df_alpha = 0.3;
-    Bx = [x,x,x,x; 
-          x,x,x,x;
-          x,x,x,x;
-          x,x,x,x];
-    out4 = edge_fit('sideLight4', 'bottom');
-    out5 = edge_fit('sideLight5', 'right');
-    
-    X4 = out4(:, 1)';
-    Y4 = out4(:, 2)';
-    Z4 = out4(:, 3)';
-    
-    dx4 = out4(:, 4)';
-    dy4 = out4(:, 5)';
-    dz4 = out4(:, 6)';
-    
-    X5 = out5(:, 1)';
-    Y5 = out5(:, 2)';
-    Z5 = out5(:, 3)';
-    
-    dx5 = out5(:, 4)';
-    dy5 = out5(:, 5)';
-    dz5 = out5(:, 6)';
-    
+    df = 1;
+    df2 = 0.1;
+    [X, Y, Z, dx, dy, dz] = edge_fit2('sideLight4', 'bottom');
+    [X2, Y2, Z2, dx2, dy2, dz2] = edge_fit2('side2', 'left');
+     
     % Edge
-    Bx = [X4;X4;X4;X4];
-    % Other two vertices
-    Bx(1, :) = X4;
-    Bx(:, 1) = X5;
-    Bx(4,4) = Bx(1, 4);
+    Bx =  [X(1),x,x,X(4); 
+          x,x,x,x;
+          x,x,x,x;
+          X2(4)-36,x,x,X2(4)];
     % Rectangle
     Bx = square(Bx);
-    % Correct edge
-    Bx(1, :) = X4;
-    Bx(:, 1) = X5;
-    Bx(2, :) = X4 + dx4;
-    Bx(:, 2) = X5 + df_alpha*dx5;
+    % Repair edge
+    Bx(1, :) = X;
+    Bx(2, :) = X + df*dx;
+    Bx(:, 4) = X2;
+    Bx(:, 3) = X2 + df2*dx2;
 
     Bx = Bx + [x,x,x,x; 
                x,x,x,x;
@@ -45,41 +25,40 @@ function sideLight6(main)
                x,x,x,x];
       
     % Edge
-    By = [Y4;Y4;Y4;Y4];
-    % Other two vertices
-   	By(4,1) = By(1, 1);
-    By(4,4) = By(1, 4);
+    By =  [Y(1),x,x,Y(4); 
+          x,x,x,x;
+          x,x,x,x;
+          Y2(4),x,x,Y2(4)];
     % Rectangle
     By = square(By);
-    % Correct edge
-    By(1, :) = Y4;
-    By(2, :) = Y4 + dy4;
-    By(:, 2) = Y5 + df_alpha*dy5;
-    
+    % Repair edge
+    By(1, :) = Y;
+    By(2, :) = Y + df*dy;
+    By(:, 4) = Y2;
+    By(:, 3) = Y2 + df2*dy2;
+
     By = By + [x,x,x,x; 
                x,x,x,x;
                x,x,x,x;
                x,x,x,x];
            
-    % Edge
-    Bz = [Z4;Z4;Z4;Z4];
-    % Other two vertices
-    Bz(4,1) = Z5(4)
-    Bz(4,4) = Bz(4, 1);
+        % Edge
+    Bz =  [Z(1),x,x,Z(4); 
+          x,x,x,x;
+          x,x,x,x;
+          Z2(4),x,x,Z2(4)];
     % Rectangle
     Bz = square(Bz);
-    % Correct edge
-    Bz(:, 1) = Z5;
-    Bz(:, 2) = Z5 + dz5;
-    Bz(1, :) = Z4;
-    Bz(2, :) = Z4 + dz4;
-    
+    % Repair edge
+    Bz(1, :) = Z;
+    Bz(2, :) = Z + df*dz;
+    Bz(:, 4) = Z2;
+    Bz(:, 3) = Z2 + df2 * dz2;
+
     Bz = Bz + [x,x,x,x; 
                x,x,x,x;
                x,x,x,x;
                x,x,x,x];
-      
-    
 
     % Write matrices into file
     storeMatrices('sideLight6', Bx, By, Bz);
@@ -88,7 +67,7 @@ function sideLight6(main)
     if (nargin == 0)
         figure('units','normalized','outerposition',[0 0 1 1]);
         car3();
-         view([0 0]);
+         view([0 90]);
 %         view([0 0]);
     end
 

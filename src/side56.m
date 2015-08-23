@@ -7,33 +7,25 @@ function side56(main)
           x,x,x,x;
           x,x,x,x];
       
-    out4 = edge_fit('side5', 'bottom');
-    out5 = edge_fit('side6', 'top');
-    
-    X4 = out4(:, 1)';
-    Y4 = out4(:, 2)';
-    Z4 = out4(:, 3)';
-    
-    dx4 = out4(:, 4)';
-    dy4 = out4(:, 5)';
-    dz4 = out4(:, 6)';
-    
-    X5 = out5(:, 1)';
-    Y5 = out5(:, 2)';
-    Z5 = out5(:, 3)';
-    
-    dx5 = out5(:, 4)';
-    dy5 = out5(:, 5)';
-    dz5 = out5(:, 6)';
+    [X, Y, Z, dx, dy, dz] = edge_fit2('side5', 'bottom');
+    [X2, Y2, Z2, dx2, dy2, dz2]  = edge_fit2('side6', 'top');
+    [X3, Y3, Z3, dx3, dy3, dz3]  = edge_fit2('side34', 'right');
+   
     
     % Edge
-    Bx = [X4;X4;X4;X4];
+    Bx = [X(1),x,x,X(4); 
+          x,x,x,x;
+          x,x,x,x;
+          X2(1),x,x,X2(4)];
     % Other two vertices
-    Bx(1, :) = X4;
-    Bx(4, :) = X5;
     % Rectangle
     Bx = square(Bx);
     % Correct edge
+    Bx(1, :) = X;
+    Bx(4, :) = X2;
+    
+    Bx(:, 1) = X3;
+   
 
     Bx = Bx + [x,x,x,x; 
                x,x,x,x;
@@ -41,13 +33,17 @@ function side56(main)
                x,x,x,x];
       
     % Edge
-    By = [Y4;Y4;Y4;Y4];
+    By = [Y(1),x,x,Y(4); 
+          x,x,x,x;
+          x,x,x,x;
+          Y2(1),x,x,Y2(4)];
     % Other two vertices
-   	By(1, :) = Y4;
-    By(4, :) = Y5;
     % Rectangle
     By = square(By);
     % Correct edge
+    By(1, :) = Y;
+    By(4, :) = Y2;
+    By(:, 1) = Y3;
     
     By = By + [x,x,x,x; 
                x,x,x,x;
@@ -55,13 +51,17 @@ function side56(main)
                x,x,x,x];
            
     % Edge
-    Bz = [Z4;Z4;Z4;Z4];
+    Bz = [Z(1),x,x,Z(4); 
+          x,x,x,x;
+          x,x,x,x;
+          Z2(1),x,x,Z2(4)];
     % Other two vertices
-    Bz(1, :) = Z4;
-    Bz(4, :) = Z5;
     % Rectangle
     Bz = square(Bz);
     % Correct edge
+    Bz(1, :) = Z;
+    Bz(4, :) = Z2;
+    Bz(:, 1) = Z3;
     
     Bz = Bz + [x,x,x,x; 
                x,x,x,x;
